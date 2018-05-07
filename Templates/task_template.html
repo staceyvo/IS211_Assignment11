@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>to do list</title>
+</head>
+<body>
+{% for item in data %}
+    <!--<p>{{item}}</p>-->
+    <p>task: {{item['name']}}, assignee: {{item['email']}}, priority: {{item['priority']}}</p>
+{% endfor %}
+</body>
+</html>

@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, render_template, request
+from wtforms import Form, validators, StringField
 
 app = Flask(__name__)
 
@@ -18,8 +19,14 @@ to_do = [
      }
 ]
 
-
 @app.route('/')
+def to_do_tasks():
+    return render_template('task_template.html', data=to_do)
+
+
+
+
+@app.route('/old')
 def display_tasks():
     task_table = '<html> <head> <title> Your Tasks </title> <body>'
 
