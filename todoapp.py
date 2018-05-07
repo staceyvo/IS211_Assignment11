@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request
-from wtforms import Form, validators, StringField
+from flask import Flask, render_template
+from wtforms import Form, validators, StringField, SelectField
 
 app = Flask(__name__)
 
@@ -19,11 +19,16 @@ to_do = [
      }
 ]
 
+class CreateTaskForm(Form):
+    task = StringField(u'Task', [validators.required(), validators.length(max=200)])
+    email = StringField(u'Email Address', [validators.required(), validators.length(max=200)])
+    priority = SelectField(u'Priority', choices=['low', 'medium', 'high'], validators=[validators.required()])
+
+
 @app.route('/')
 def to_do_tasks():
+    #return render_template('task_template.html', data=to_do, form=CreateTaskForm())
     return render_template('task_template.html', data=to_do)
-
-
 
 
 @app.route('/old')
