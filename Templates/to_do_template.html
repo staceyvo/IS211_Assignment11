@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>to do list</title>
+</head>
+<body>
+
+
+<form action="" method="post">
+    <div class="input text">
+        {{ my_form.task.label }} {{ my_form.task }}
+    </div>
+
+    <div class="input text">
+        {{ my_form.email.label }} {{ my_form.email }}
+    </div>
+
+    <div class="input text">
+        {{ my_form.priority.label }} {{ my_form.priority }}
+    </div>
+    <div class="input submit">
+        <input type="submit" value="Submit"/>
+    </div>
+</form>
+</body>
+</html>

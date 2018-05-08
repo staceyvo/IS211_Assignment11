@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from wtforms import Form, validators, StringField, SelectField
 
 app = Flask(__name__)
@@ -13,7 +13,7 @@ class CreateTaskForm(Form):
                            validators=[validators.required()])
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/submit', methods=['POST', 'GET'])
 def to_do_tasks():
     if request.method == 'POST':
         task2 = {
@@ -22,17 +22,14 @@ def to_do_tasks():
             'priority': request.form['priority']
         }
         to_do.append(task2)
-    return render_template('task_template.html', data=to_do, my_form=CreateTaskForm())
+        return redirect(url_for('display_tasks'))
+    return render_template('to_do_template.html', data=to_do, my_form=CreateTaskForm())
 
 
-@app.route('/old')
+
+@app.route('/')
 def display_tasks():
-    task_table = '<html> <head> <title> Your Tasks </title> <body>'
-
-    for task in to_do:
-        task_table += '<p>{}, {}, {} </p>'.format(task['name'], task['email'], task['priority'])
-    task_table += '</body> </html>'
-    return task_table
+    return render_template('task_template.html', data=to_do)
 
 
 if __name__ == '__main__':
