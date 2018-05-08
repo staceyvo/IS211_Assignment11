@@ -12,16 +12,23 @@ class CreateTaskForm(Form):
     priority = SelectField(u'Priority', choices=[('low', 'low'), ('medium', 'medium'), ('high', 'high')],
                            validators=[validators.required()])
 
+@app.route('/clear')
+def clear_list():
+    del to_do[:]
+    return redirect(url_for('display_tasks'))
+
+
 
 @app.route('/submit', methods=['POST', 'GET'])
 def to_do_tasks():
     if request.method == 'POST':
-        task2 = {
-            'task': request.form['task'],
-            'email': request.form['email'],
-            'priority': request.form['priority']
-        }
-        to_do.append(task2)
+        if CreateTaskForm(request.form).validate():
+            task2 = {
+                'task': request.form['task'],
+                'email': request.form['email'],
+                'priority': request.form['priority']
+            }
+            to_do.append(task2)
         return redirect(url_for('display_tasks'))
     return render_template('to_do_template.html', data=to_do, my_form=CreateTaskForm())
 
