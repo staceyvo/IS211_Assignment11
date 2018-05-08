@@ -22,14 +22,12 @@ to_do = [
 class CreateTaskForm(Form):
     task = StringField(u'Task', [validators.required(), validators.length(max=200)])
     email = StringField(u'Email Address', [validators.required(), validators.length(max=200)])
-    priority = SelectField(u'Priority', choices=['low', 'medium', 'high'], validators=[validators.required()])
+    priority = SelectField(u'Priority', choices=[('low','low'), ('medium', 'medium'), ('high', 'high')], validators=[validators.required()])
 
 
 @app.route('/')
 def to_do_tasks():
-    #return render_template('task_template.html', data=to_do, form=CreateTaskForm())
-    return render_template('task_template.html', data=to_do)
-
+    return render_template('task_template.html', data=to_do, my_form=CreateTaskForm())
 
 @app.route('/old')
 def display_tasks():
