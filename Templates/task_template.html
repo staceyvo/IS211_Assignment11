@@ -5,6 +5,11 @@
     <title>to do list</title>
 </head>
 <body>
+<a href='/submit'>Submit task</a>
+
+<a href='/clear'>Clear to do list</a>
+
+
 {% for item in data %}
     <p>task: {{item['task']}}, assignee: {{item['email']}}, priority: {{item['priority']}}</p>
 {% endfor %}
